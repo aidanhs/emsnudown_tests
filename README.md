@@ -7,8 +7,8 @@ New comments may be obtained with the [comment stream](http://www.reddit.com/r/T
 Anonymisation has been performed with
 
 ```
+$ mv 2013-06-27_HOUR-21 2013-06-27_HOUR-21_full
 $ python
-$ cp 2013-06-27_HOUR-21 2013-06-27_HOUR-21_full
 >>> import json
 >>> comments = open("2013-06-27_HOUR-21_full").readlines()
 >>> comments = map(lambda x: json.loads(x), comments)
