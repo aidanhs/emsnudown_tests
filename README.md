@@ -9,17 +9,23 @@ Anonymisation has been performed with
 ```
 $ python
 $ cp 2013-06-27_HOUR-21 2013-06-27_HOUR-21_full
+>>> import json
 >>> comments = open("2013-06-27_HOUR-21_full").readlines()
 >>> comments = map(lambda x: json.loads(x), comments)
 >>> comments = map(lambda x: {u"body": x["body"]}, comments)
 >>> out = open("2013-06-27_HOUR-21_stripped", "w")
 >>> out.writelines(map(lambda x: json.dumps(x) + "\n", comments))
 >>> out.close()
+>>>
+>>> import re
+>>> comments = map
+>>> comments = map(lambda x: {u"body": re.sub("[a-z]", "m", x["body"])}, comments)
+>>> comments = map(lambda x: {u"body": re.sub("[A-Z]", "M", x["body"])}, comments)
+>>> comments = map(lambda x: {u"body": re.sub("[0-9]", "5", x["body"])}, comments)
+>>> out = open("2013-06-27_HOUR-21_anon", "w")
+>>> out.writelines(map(lambda x: json.dumps(x) + "\n", comments))
+>>> out.close()
 >>> exit()
-$ cp 2013-06-27_HOUR-21_stripped 2013-06-27_HOUR-21_anon
-$ sed -i 's/[a-z]/m/g' 2013-06-27_HOUR-21_anon
-$ sed -i 's/[A-Z]/M/g' 2013-06-27_HOUR-21_anon
-$ sed -i 's/[1-9]/5/g' 2013-06-27_HOUR-21_anon
 $ ln -s 2013-06-27_HOUR-21_anon 2013-06-27_HOUR-21
 $ git add 2013-06-27_HOUR-21_anon 2013-06-27_HOUR-21
 ```
